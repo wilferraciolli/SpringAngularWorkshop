@@ -1,12 +1,12 @@
 package com.wiltech.controller;
 
 import com.wiltech.model.Oportunity;
+import com.wiltech.repository.OportunityRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -16,20 +16,17 @@ import java.util.List;
 @RequestMapping("/oportunities")
 public class OportunityController {
 
-  /**
-   * Get all list.
-   *
-   * @return the list
-   */
-  @GetMapping
-  public List<Oportunity> getAll(){
+    @Autowired
+    private OportunityRepository oportunityRepository;
 
-    Oportunity oportunity = new Oportunity();
-    oportunity.setId(1L);
-    oportunity.setDescription("Senior software Engineer");
-    oportunity.setProspectName("WilTech");
-    oportunity.setValue(new BigDecimal(60_000));
+    /**
+     * Get all oportunities list.
+     *
+     * @return the list
+     */
+    @GetMapping
+    public List<Oportunity> getAll() {
 
-    return Arrays.asList(oportunity);
-  }
+        return oportunityRepository.findAll();
+    }
 }

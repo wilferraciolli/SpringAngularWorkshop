@@ -1,8 +1,8 @@
-create table oportunidade (
+create table oportunity (
   id                        bigint auto_increment       not null,
-  nome_prospecto            varchar(80)                 not null,
-  descricao                 varchar(200)                not null,
-  valor                     decimal(10,2),
+  prospect_name             varchar(80)                 not null,
+  description               varchar(200)                not null,
+  value                     decimal(10,2),
 
   primary key (id)
 );

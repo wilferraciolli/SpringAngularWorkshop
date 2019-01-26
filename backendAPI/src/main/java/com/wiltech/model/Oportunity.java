@@ -11,24 +11,24 @@ import java.math.BigDecimal;
 /**
  * The type Oportunity bean ORM.
  */
-@Entity
 @Data
+@Entity
 public class Oportunity {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  @NotEmpty
-  @Size(max = 80)
-  @Column(name = "nome_prospecto")
-  private String prospectName;
+    @NotEmpty
+    @Size(max = 80)
+    @Column(name = "prospect_name")
+    private String prospectName;
 
-  @NotEmpty
-  @Size(max = 200)
-  private String description;
+    @NotEmpty
+    @Size(max = 200)
+    private String description;
 
-  @Min(0)
-  private BigDecimal value;
+    @Min(0)
+    private BigDecimal value;
 
 }
