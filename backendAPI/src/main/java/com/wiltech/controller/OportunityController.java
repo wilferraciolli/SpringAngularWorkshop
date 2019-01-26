@@ -17,6 +17,7 @@ import java.util.Optional;
  * The type Oportunity controller.
  */
 @RestController
+@CrossOrigin
 @RequestMapping("/oportunities")
 public class OportunityController {
 
