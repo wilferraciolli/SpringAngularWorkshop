@@ -1,5 +1,6 @@
 package com.wiltech.controller;
 
+import com.wiltech.exceptions.ResourceNotFoundException;
 import com.wiltech.model.Oportunity;
 import com.wiltech.repository.OportunityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,25 @@ public class OportunityController {
     }
 
     /**
+     * Create oportunity oportunity.
+     *
+     * @param payload the payload
+     * @return the oportunity
+     */
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping
+    public Oportunity createOportunity(@Valid @RequestBody final Oportunity payload) {
+
+        final Optional<Oportunity> existentOportunity = oportunityRepository.findByDescriptionAndProspectName(payload.getDescription(), payload.getProspectName());
+
+        if (existentOportunity.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Oportunities with this description and prospect name already exists.");
+        }
+
+        return oportunityRepository.save(payload);
+    }
+
+    /**
      * Find oportunity.
      *
      * @param id the id
@@ -62,27 +82,26 @@ public class OportunityController {
     public ResponseEntity<Oportunity> update(@PathVariable("id") final Long id, @Valid @RequestBody final Oportunity payload) {
 
         final Oportunity oportunity = oportunityRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Oportunity not found for given id."));
+                .orElseThrow(() -> new ResourceNotFoundException(Oportunity.class.getName(), "id", id));
+
+        oportunity.update(payload);
 
         return ResponseEntity.ok(oportunityRepository.save(oportunity));
     }
 
     /**
-     * Create oportunity oportunity.
+     * Delete response entity.
      *
-     * @param payload the payload
-     * @return the oportunity
+     * @param id the id
+     * @return the response entity
      */
-    @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping
-    public Oportunity createOportunity(@Valid @RequestBody final Oportunity payload) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity delete(@PathVariable("id") final Long id) {
 
-        final Optional<Oportunity> existentOportunity = oportunityRepository.findByDescriptionAndProspectName(payload.getDescription(), payload.getProspectName());
+        final Oportunity oportunity = oportunityRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(Oportunity.class.getName(), "id", id));
+        oportunityRepository.delete(oportunity);
 
-        if (existentOportunity.isPresent()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Oportunities with this description and prospect name already exists.");
-        }
-
-        return oportunityRepository.save(payload);
+        return ResponseEntity.noContent().build();
     }
 }

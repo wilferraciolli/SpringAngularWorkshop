@@ -31,4 +31,9 @@ public class Oportunity {
     @Min(0)
     private BigDecimal value;
 
+    public void update(final Oportunity payload) {
+        this.prospectName = payload.getProspectName();
+        this.description = payload.getDescription();
+        this.value = payload.getValue();
+    }
 }
