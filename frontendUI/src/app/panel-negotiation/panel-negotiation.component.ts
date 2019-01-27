@@ -8,13 +8,19 @@ import { OportunityService } from '../oportunity.service';
 })
 export class PanelNegotiationComponent implements OnInit {
 
+  oportunity = {};
   oportunities = [];
 
   constructor(private oportunityService: OportunityService) { }
 
   ngOnInit() {
+    this.findAll();
+  }
+
+  findAll() {
     this.oportunityService.findAll()
     .subscribe(response => this.oportunities = <any> response);
   }
+
 
 }

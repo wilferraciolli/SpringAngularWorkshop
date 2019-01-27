@@ -6,7 +6,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { PanelNegotiationComponent } from './panel-negotiation/panel-negotiation.component';
 
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { TableModule } from 'primeng/table';
+import { PanelModule } from 'primeng/panel';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { ToastModule } from 'primeng/toast';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -17,6 +23,11 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    TableModule,
+    PanelModule,
+    InputTextModule,
+    ButtonModule,
+    ToastModule,
     BrowserAnimationsModule
   ],
   providers: [],

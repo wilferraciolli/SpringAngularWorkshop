@@ -1,13 +1,46 @@
-<table>
-  <tr>
-    <th>Description</th>
-    <th>Prospect</th>
-    <th>Value</th>
-  </tr>
+{{oportunity |json}}
 
-  <tr *ngFor="let oportunity of oportunities">
-    <td>{{ oportunity.description }}</td>
-    <td>{{ oportunity.prospectName }}</td>
-    <td>{{ oportunity.value }}</td>
-  </tr>
-</table>
+<p-panel header="New oportunity">
+  <div class="p-grid">
+    <div class="p-col-2">Description</div>
+    <div class="p-col-10">
+      <input pInputText type="text" [(ngModel)]="oportunity.description">
+    </div>
+
+    <div class="p-col-2">Perspect</div>
+    <div class="p-col-10">
+      <input pInputText type="text" [(ngModel)]="oportunity.perspectName">
+    </div>
+
+    <div class="p-col-2">Value</div>
+    <div class="p-col-10">
+      <input pInputText type="text" [(ngModel)]="oportunity.value">
+    </div>
+
+    <div class="p-col-10 p-offset-2">
+      <button pButton type="submit" label="Add" (click)="create()"></button>
+    </div>
+
+  </div>
+</p-panel>
+
+<p-table [value]="oportunities">
+  <!-- Create a template to specify that this is a header-->
+  <ng-template pTemplate="header">
+    <tr>
+        <th>Description</th>
+        <th>Prospect</th>
+        <th>Value</th>
+    </tr>
+  </ng-template>
+
+  <!-- body of the table-->
+  <ng-template pTemplate="body" let-oportunity>
+      <tr>
+          <td>{{ oportunity.description }}</td>
+          <td>{{ oportunity.prospectName }}</td>
+          <td>{{ oportunity.value }}</td>
+      </tr>
+    </ng-template>
+
+</p-table>
