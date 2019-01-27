@@ -18,5 +18,4 @@ export class OportunityService {
     return this.httpClient.post(this.apiUrl, oportunidade);
   }
 
-
 }
