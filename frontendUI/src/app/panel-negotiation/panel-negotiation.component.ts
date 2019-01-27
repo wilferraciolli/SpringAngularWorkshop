@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OportunityService } from '../oportunity.service';
 
 @Component({
   selector: 'app-panel-negotiation',
@@ -7,16 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PanelNegotiationComponent implements OnInit {
 
-  oportunities = [
-    { description: 'Software Engineer', prospectName: 'Software Engineer', value: 123 },
-    { description: 'Architect', prospectName: 'Software Engineer', value: 1233 }
-  ];
+  oportunities = [];
 
-  name = 'frontendUI';
-
-  constructor() { }
+  constructor(private oportunityService: OportunityService) { }
 
   ngOnInit() {
+    this.oportunityService.findAll()
+    .subscribe(response => this.oportunities = <any> response);
   }
 
 }
